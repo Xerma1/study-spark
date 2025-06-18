@@ -3,13 +3,14 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Subject, Subjects as BaseSubjects } from '@/data/subjects';
+import { Topic } from '@/data/topic';
 
-interface AddSubjectProps {
-  subjects: Subject[];
-  setSubjects: (subjects: Subject[]) => void;
+interface AddTopicsProp {
+  topics: Topic[];
+  setTopics: (topics: Topic[]) => void;
 }
 
-export default function AddSubject({ subjects, setSubjects }: AddSubjectProps) {
+export default function AddTopic({ topics, setTopics }: AddTopicsProp) {
 
   const [isOpen, setIsOpen] = useState(false);
   const [inputValue, setInputValue] = useState('');
@@ -17,6 +18,7 @@ export default function AddSubject({ subjects, setSubjects }: AddSubjectProps) {
   const openModal = () => setIsOpen(true);
   const closeModal = () => setIsOpen(false);
 
+  /*
   const handleSubmit = () => {
     if (inputValue.trim() !== "") {
       const newSubjects = [...subjects, new Subject(inputValue,[])];
@@ -26,6 +28,7 @@ export default function AddSubject({ subjects, setSubjects }: AddSubjectProps) {
       closeModal();
     }
   };
+  */
 
   return (
     <div className="p-8">
@@ -34,7 +37,7 @@ export default function AddSubject({ subjects, setSubjects }: AddSubjectProps) {
         text-[#E0E1DD] text-2xl font-bold px-4 py-2 rounded-xl w-full cursor-pointer"
         onClick={openModal}
       >
-        Add subject
+        Add Topic
       </button>
 
       {/* Modal */}
@@ -55,7 +58,7 @@ export default function AddSubject({ subjects, setSubjects }: AddSubjectProps) {
               transition={{ duration: 0.1 }}
               className="bg-white p-6 rounded-lg shadow-lg w-96"
             >
-              <h2 className="text-xl mb-4">Enter subject name</h2>
+              <h2 className="text-xl mb-4">Enter Topic name</h2>
               <input
                 type="text"
                 className="w-full border border-gray-300 p-2 rounded mb-4"
@@ -65,13 +68,13 @@ export default function AddSubject({ subjects, setSubjects }: AddSubjectProps) {
               <div className="flex justify-end space-x-2">
                 <button
                   onClick={closeModal}
-                  className="bg-gray-300 text-gray-700 px-4 py-2 rounded cursor-pointer hover:opacity-80"
+                  className="bg-gray-300 text-gray-700 px-4 py-2 rounded cursor-pointer"
                 >
                   Cancel
                 </button>
                 <button
-                  onClick={handleSubmit}
-                  className="bg-blue-500 text-white px-4 py-2 rounded cursor-pointer hover:opacity-80"
+                  //onClick={handleSubmit}
+                  className="bg-blue-500 text-white px-4 py-2 rounded cursor-pointer"
                 >
                   Submit
                 </button>
@@ -83,4 +86,3 @@ export default function AddSubject({ subjects, setSubjects }: AddSubjectProps) {
     </div>
   );
 }
-
