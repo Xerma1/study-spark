@@ -15,9 +15,9 @@ export class Subject {
 export const Subjects: Subject[] = [
 	new Subject("Intro to computing: SC1007",[
 		new Topic('Data types', [
-			new StudySession('Low', '6/1/2025'),
-			new StudySession('Mid', '6/3/2025'),
-			new StudySession('High', '6/18/2025')
+			new StudySession('Low', 'Mon Jun 2 2025'),
+			new StudySession('Mid', 'Thu Jun 5 2025'),
+			new StudySession('High', 'Thu Jun 12 2025')
 		]),
 		new Topic('Python syntax',[]),
 		new Topic('For loops',[]),
