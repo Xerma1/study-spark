@@ -9,7 +9,7 @@ import Link from 'next/link';
 export default function RenderTopicCards({ topics, subjectName }: { topics: Topic[], subjectName: string }) {
   const params = useParams();
   const index = Number(params.subjectId);
-  
+
   return (
     <div className="mt-8">
       <h1 className="text-2xl font-bold text-white">Subject {'>'} {subjectName}</h1>
@@ -19,7 +19,7 @@ export default function RenderTopicCards({ topics, subjectName }: { topics: Topi
           <Link
             href={`/subject/${index}/${topicId}`}
             key={topicId}
-            className="p-4 bg-blue-400 rounded hover:opacity-80"
+            className="p-4 bg-blue-400 rounded hover:opacity-80 transition-opacity duration-100"
           >
             <h1 className="text-xl">{topic.name}</h1>
           </Link>
