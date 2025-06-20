@@ -1,18 +1,22 @@
-'use client';
-
-import { useParams } from 'next/navigation';
-import { useEffect, useState } from 'react';
-import { Subject } from '@/data/subjects';
-import { Topic } from '@/data/topic';
-import Link from 'next/link';
 import { StudySession } from '@/data/studySession';
+import clsx from 'clsx';
 
 export default function RenderStudySeshCards({ sessions, subjectName, topicName }: { 
   sessions: StudySession[],
   subjectName: string,
   topicName: string
   }) {
-
+  
+  if (sessions.length === 0){
+    // handle empty sessions if needed
+    return (
+      <div className="m-8">
+        <h1 className="text-3xl font-bold text-white mb-4">{subjectName}</h1>
+        <h1 className="text-2xl font-bold text-white">Topic {'>'} {topicName}</h1>
+        <h1 className="flex justify-center text-300 text-white mt-20">You have currently no study sessions, lets get started with our first one!</h1>
+      </div>
+    );
+  }
   return (
     <div className="m-8">
       <h1 className="text-3xl font-bold text-white mb-4">{subjectName}</h1>
@@ -22,9 +26,16 @@ export default function RenderStudySeshCards({ sessions, subjectName, topicName 
         {sessions.map((session, sessionId) => (
           <div
             key={sessionId}
-            className="p-4 bg-blue-400 rounded hover:opacity-80 transition-opacity duration-100"
+            className={clsx(
+              'p-4 rounded hover:opacity-80',
+              {
+                'bg-[#E62026]': session.levelOfConfidence === 'Low',
+                'bg-[#E6C137]': session.levelOfConfidence === 'Medium',
+                'bg-green-500': session.levelOfConfidence === 'High',
+              }
+            )}
           >
-            <h1 className="text-xl">{session.levelOfConfidence}, {session.date}</h1>
+            <h1 className="text-black">{session.levelOfConfidence}, {session.date}</h1>
           </div>
         ))}
       </div>

@@ -24,8 +24,8 @@ export default function Page() {
   };
 
   return (
-    <div className="flex items-start">
-      <main className="flex-1 p-8 flex flex-col">
+    <div className="flex items-start justify-center">
+      <main className="flex-1 p-8 flex flex-col max-w-4xl">
         <AddSubject subjects={subjects} setSubjects={setSubjects} />
         <div className="flex">
           <button className="bg-[#D12E34] text-[#E0E1DD] cursor-pointer p-2 rounded-xl"

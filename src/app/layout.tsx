@@ -28,7 +28,7 @@ export default function RootLayout({
       <body>
         <div className="flex">
           <Navbar />
-          <main className="flex-1">{children}</main>
+          <main className="flex-1 pl-58">{children}</main>
         </div>
       </body>
     </html>

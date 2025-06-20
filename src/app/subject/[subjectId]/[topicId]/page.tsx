@@ -28,9 +28,11 @@ export default function Page() {
     }, [subjectId, topicId]);
 
     return(
-        <>
-            <AddStudySession sessions={sessions} setSessions={setSessions} />
-            <RenderStudySeshCards sessions={sessions} subjectName={subjectName} topicName={topicName}/>
-        </>
+      <div className="flex justify-center">
+        <div className="flex-1 p-8 max-w-4xl">
+          <AddStudySession sessions={sessions} setSessions={setSessions} />
+          <RenderStudySeshCards sessions={sessions} subjectName={subjectName} topicName={topicName}/>
+        </div>
+      </div>
     );
 }

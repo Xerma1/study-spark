@@ -21,7 +21,7 @@ export default function RenderTopicCards({ topics, subjectName }: { topics: Topi
             key={topicId}
             className="p-4 bg-blue-400 rounded hover:opacity-80 transition-opacity duration-100"
           >
-            <h1 className="text-xl">{topic.name}</h1>
+            <h1>{topic.name}</h1>
           </Link>
         ))}
       </div>

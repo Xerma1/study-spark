@@ -52,7 +52,7 @@ export default function AddTopic({ topics, setTopics }: AddTopicsProp) {
         text-[#E0E1DD] text-2xl font-bold px-4 py-2 rounded-xl w-full cursor-pointer"
         onClick={openModal}
       >
-        Add Topic
+        Add Topic (+)
       </button>
 
       {/* Modal */}

@@ -59,7 +59,7 @@ export default function AddStudySession({ sessions, setSessions }: AddSeshProp) 
         text-[#E0E1DD] text-2xl font-bold px-4 py-2 rounded-xl w-full cursor-pointer"
         onClick={openModal}
       >
-        Add Study Session
+        Add Study Session (+)
       </button>
 
       {/* Modal */}

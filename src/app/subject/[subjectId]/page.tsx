@@ -26,9 +26,11 @@ export default function SubjectPage() {
 
 
   return (
-    <div className="p-8">
-      <AddTopic topics={topics} setTopics={setTopics} />
-      <TopicCards topics={topics} subjectName={subjectName}/>
+    <div className="flex justify-center">
+      <div className="flex-1 p-8 max-w-4xl">
+        <AddTopic topics={topics} setTopics={setTopics} />
+        <TopicCards topics={topics} subjectName={subjectName}/>
+      </div>
     </div>
   );
 }

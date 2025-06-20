@@ -19,7 +19,7 @@ export default function AddSubject({ subjects, setSubjects }: AddSubjectProps) {
 
   const handleSubmit = () => {
     if (inputValue.trim() !== "") {
-      const newSubjects = [...subjects, new Subject(inputValue,[])];
+      const newSubjects = [...subjects, new Subject(inputValue, 0,[])];
       setSubjects(newSubjects);
       localStorage.setItem('subjects', JSON.stringify(newSubjects));
       setInputValue('');
@@ -34,7 +34,7 @@ export default function AddSubject({ subjects, setSubjects }: AddSubjectProps) {
         text-[#E0E1DD] text-2xl font-bold px-4 py-2 rounded-xl w-full cursor-pointer"
         onClick={openModal}
       >
-        Add subject
+        Add subject (+)
       </button>
 
       {/* Modal */}
