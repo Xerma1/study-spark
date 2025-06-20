@@ -3,14 +3,32 @@
 import TopicCards from '@/components/TopicCards';
 import AddTopic from '@/components/AddTopic';
 import { useState, useEffect } from 'react';
+import { useParams } from 'next/navigation';
+import { Topic } from '@/data/topic';
 
 export default function SubjectPage() {
-  const [topics, setTopics] = useState<any[]>([]);
+  const [topics, setTopics] = useState<Topic[]>([]);
+  const params = useParams();
+  const subjectId = Number(params.subjectId);
+  const [subjectName, setSubjectName] = useState<string>('');
+  
+  useEffect(() => {
+    const stored = localStorage.getItem("subjects");
+    if (stored) {
+      const subjects = JSON.parse(stored);
+      if (subjects[subjectId]) {
+        setTopics(subjects[subjectId].topics || []);
+        setSubjectName(subjects[subjectId].name || '');
+      }
+    } 
+  }, [subjectId]);
+
+
 
   return (
     <div className="p-8">
       <AddTopic topics={topics} setTopics={setTopics} />
-      <TopicCards />
+      <TopicCards topics={topics} subjectName={subjectName}/>
     </div>
   );
 }

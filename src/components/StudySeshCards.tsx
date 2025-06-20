@@ -34,8 +34,6 @@ export default function RenderStudySeshCards() {
     }
   }, [topicIndex, subject]);
 
-  console.log(topic);
-
   if (!topic) {
     return <div className="text-white">Topic not found.</div>;
   }

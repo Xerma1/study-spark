@@ -1,9 +1,12 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { useParams } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Subject, Subjects as BaseSubjects } from '@/data/subjects';
+import { Subject, Subjects } from '@/data/subjects';
 import { Topic } from '@/data/topic';
+
+
 
 interface AddTopicsProp {
   topics: Topic[];
@@ -18,17 +21,29 @@ export default function AddTopic({ topics, setTopics }: AddTopicsProp) {
   const openModal = () => setIsOpen(true);
   const closeModal = () => setIsOpen(false);
 
-  /*
+  const params = useParams();
+  const subjectIndex = Number(params.subjectId);
+
   const handleSubmit = () => {
     if (inputValue.trim() !== "") {
-      const newSubjects = [...subjects, new Subject(inputValue,[])];
-      setSubjects(newSubjects);
-      localStorage.setItem('subjects', JSON.stringify(newSubjects));
+      // Get subjects from localStorage
+      const stored = localStorage.getItem('subjects');
+      if (stored) {
+        const subjects: Subject[] = JSON.parse(stored);
+        // Add topic to the correct subject
+        if (subjects[subjectIndex]) {
+          const newTopics = [...topics, new Topic(inputValue,[])];
+          setTopics(newTopics);
+          subjects[subjectIndex].topics.push(new Topic(inputValue, []));
+          // Save back to localStorage
+          localStorage.setItem('subjects', JSON.stringify(subjects));
+        }
+      }
       setInputValue('');
       closeModal();
     }
   };
-  */
+  
 
   return (
     <div className="p-8">
@@ -73,7 +88,7 @@ export default function AddTopic({ topics, setTopics }: AddTopicsProp) {
                   Cancel
                 </button>
                 <button
-                  //onClick={handleSubmit}
+                  onClick={handleSubmit}
                   className="bg-blue-500 text-white px-4 py-2 rounded cursor-pointer"
                 >
                   Submit
