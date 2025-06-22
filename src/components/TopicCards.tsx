@@ -17,10 +17,18 @@ export default function RenderTopicCards({ topics, subjectName, refresh }: { top
     setSortedTopics(sorted);
   }, [index, refresh]);
 
+  if (sortedTopics.length === 0){
+    return (
+      <div className="mt-8 text-[#E0E1DD] flex justify-center">
+        <h1>You currently have no topics. Start by adding some!</h1>
+      </div>
+    );
+  }
+
   return (
     <div className="mt-8">
-      <h1 className="text-2xl font-bold text-white">Subject {'>'} {subjectName}</h1>
-      <h1 className="text-xl text-white pl-7 mt-2">Topics:</h1>
+      <h1 className="text-2xl font-bold text-[#E0E1DD]">Subject {'>'} {subjectName}</h1>
+      <h1 className="text-xl text-[#E0E1DD] pl-7 mt-2">Topics:</h1>
       <div className="flex flex-col gap-4 m-4">
         {sortedTopics.map((topic, topicId) => (
           <Link
