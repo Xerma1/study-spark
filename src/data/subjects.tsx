@@ -22,10 +22,11 @@ export const Subjects: Subject[] = [
 			new StudySession('Low', 'Mon Jun 2 2025'),
 			new StudySession('Medium', 'Thu Jun 5 2025'),
 			new StudySession('High', 'Thu Jun 12 2025')
-		]),
-		new Topic('Python syntax',[]),
-		new Topic('For loops',[]),
-		new Topic('While loops',[])
+		], 80),
+		new Topic('Python syntax',[], 0),
+		new Topic('For loops',[], 0),
+		new Topic('While loops',[], 0)
+		
 	]),
 	new Subject("Discrete maths: MH1812", 0,[]),
 	new Subject("Comp architecture: SC1006", 0,[]),

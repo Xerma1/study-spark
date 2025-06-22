@@ -32,9 +32,9 @@ export default function AddTopic({ topics, setTopics }: AddTopicsProp) {
         const subjects: Subject[] = JSON.parse(stored);
         // Add topic to the correct subject
         if (subjects[subjectIndex]) {
-          const newTopics = [...topics, new Topic(inputValue,[])];
+          const newTopics = [...topics, new Topic(inputValue, [], 0)];
           setTopics(newTopics);
-          subjects[subjectIndex].topics.push(new Topic(inputValue, []));
+          subjects[subjectIndex].topics.push(new Topic(inputValue, [], 0));
           // Save back to localStorage
           localStorage.setItem('subjects', JSON.stringify(subjects));
         }

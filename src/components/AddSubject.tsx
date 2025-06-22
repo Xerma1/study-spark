@@ -28,13 +28,13 @@ export default function AddSubject({ subjects, setSubjects }: AddSubjectProps) {
   };
 
   return (
-    <div className="p-8">
+    <div className="p-8"> 
       <button
         className="block bg-[#415A77] hover:bg-[#E0E1DD] hover:text-[#0D1B2A] transition-colors duration-100
         text-[#E0E1DD] text-2xl font-bold px-4 py-2 rounded-xl w-full cursor-pointer"
         onClick={openModal}
       >
-        Add subject (+)
+        Add course (+)
       </button>
 
       {/* Modal */}

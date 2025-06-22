@@ -5,7 +5,7 @@ export class StudySession {
 
   constructor(levelOfConfidence: string, date: string) {
 		this.levelOfConfidence = levelOfConfidence;
-        this.date = date;
+    this.date = date;
   }
 }
 

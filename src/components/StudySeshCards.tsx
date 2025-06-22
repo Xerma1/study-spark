@@ -21,7 +21,10 @@ export default function RenderStudySeshCards({ sessions, subjectName, topicName 
     <div className="m-8">
       <h1 className="text-3xl font-bold text-white mb-4">{subjectName}</h1>
       <h1 className="text-2xl font-bold text-white">Topic {'>'} {topicName}</h1>
-      <h1 className="text-xl text-white pl-7 pt-4">Showing past study sessions:</h1>
+      <div className='flex items-center'>
+        <img src="/study.svg" className="mt-1 -mr-4 w-7 h-7"/>
+        <h1 className="text-xl text-white pl-7 pt-4">Showing past study sessions:</h1>
+      </div>
       <div className="flex flex-col gap-4 m-4">
         {sessions.map((session, sessionId) => (
           <div
