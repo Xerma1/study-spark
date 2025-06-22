@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Subject} from '@/data/subjects';
 import { StudySession } from '@/data/studySession';
 import Calendar from 'react-calendar';
+import calcTopicScore from '@/utils/calcTopicScore';
 import 'react-calendar/dist/Calendar.css';
 
 
@@ -40,8 +41,13 @@ export default function AddStudySession({ sessions, setSessions }: AddSeshProp) 
         if (topic) {
           const newSesh = [...sessions, new StudySession(inputValue1, inputValue2.toDateString())];
           setSessions(newSesh);
-          // Save back to localStorage
+          // Update the topic studySessions array
           topic.studySessions.push(new StudySession(inputValue1, inputValue2.toDateString()));
+          // Calculate the new score for the topic
+          const newScore = calcTopicScore(topic);
+          // Update the score of the topic with the new score
+          topic.score = newScore;
+          // Save to local storage
           localStorage.setItem('subjects', JSON.stringify(subjects));
         }
       }
