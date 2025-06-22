@@ -6,7 +6,7 @@ import { Topic } from '@/data/topic';
 import sortTopicsInLocalStorage from '@/utils/sortTopics';
 import Link from 'next/link';
 
-export default function RenderTopicCards({ topics, subjectName }: { topics: Topic[], subjectName: string }) {
+export default function RenderTopicCards({ topics, subjectName, refresh }: { topics: Topic[], subjectName: string, refresh: number }) {
   const params = useParams();
   const index = Number(params.subjectId);
 
@@ -15,7 +15,7 @@ export default function RenderTopicCards({ topics, subjectName }: { topics: Topi
   useEffect(() => {
     const sorted = sortTopicsInLocalStorage(index) || [];
     setSortedTopics(sorted);
-  }, [index]);
+  }, [index, refresh]);
 
   return (
     <div className="mt-8">

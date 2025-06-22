@@ -11,9 +11,10 @@ import { Topic } from '@/data/topic';
 interface AddTopicsProp {
   topics: Topic[];
   setTopics: (topics: Topic[]) => void;
+  setRefresh: React.Dispatch<React.SetStateAction<number>>;
 }
 
-export default function AddTopic({ topics, setTopics }: AddTopicsProp) {
+export default function AddTopic({ topics, setTopics, setRefresh }: AddTopicsProp) {
 
   const [isOpen, setIsOpen] = useState(false);
   const [inputValue, setInputValue] = useState('');
@@ -37,6 +38,7 @@ export default function AddTopic({ topics, setTopics }: AddTopicsProp) {
           subjects[subjectIndex].topics.push(new Topic(inputValue, [], 0));
           // Save back to localStorage
           localStorage.setItem('subjects', JSON.stringify(subjects));
+          setRefresh(r => r + 1);
         }
       }
       setInputValue('');

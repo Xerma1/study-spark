@@ -24,7 +24,6 @@ export default function calcTopicScore(topic: Topic) {
     const diffMs = sessionDate.getTime() - now.getTime();
     // Convert milliseconds to days
     const diffDays = -(Math.round(diffMs / (1000 * 60 * 60 * 24)));
-    console.log(diffDays);
 
     // Check the level of confidence and the diffDays and produce a score
     const baseMultipliers: Record<string, number> = {
