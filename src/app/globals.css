@@ -19,8 +19,24 @@
   }
 }
 
-body {
-  background: var(--background);
+html, body {
+  min-height: 100vh;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(135deg, #1B263B 0%, #365578 100%);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+  position: relative;
+  z-index: 0;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: url('/lofi.jpg') center/cover no-repeat;
+  opacity: 0.4; /* Lower = more gradient, higher = more image */
+  pointer-events: none;
 }

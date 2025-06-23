@@ -101,9 +101,14 @@ export default function RenderSubjectCards({ subjects }: { subjects: Subject[] }
             const score = calcSubjectScore(subject);
             let bgColor = "bg-blue-400";
 
-            if (score < 40) bgColor = "bg-red-400";
+            if (score === -1) bgColor = "bg-gray-300";
+            else if (score < 40) bgColor = "bg-red-400";
             else if (score < 70) bgColor = "bg-yellow-300";
             else bgColor = "bg-green-400";
+
+            let scoreUI;
+            if (score === -1) scoreUI = "No topics registered";
+            else scoreUI = `${score} %`;
 
             return(
               <div key={subjectId} className="relative">
@@ -124,7 +129,7 @@ export default function RenderSubjectCards({ subjects }: { subjects: Subject[] }
                     </button>
                   </div>
                   <div className="mt-2 text-sm text-gray-700 font-semibold">
-                    Proficiency: {score}%
+                    Proficiency: {scoreUI}
                   </div>
                 </Link>
                 {openMenu === subjectId && (

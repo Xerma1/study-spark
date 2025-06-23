@@ -26,7 +26,7 @@ export default function Page() {
   };
 
   return (
-    <div className="flex items-start justify-center">
+    <div className="min-h-screen flex items-start justify-center">
       <main className="flex-1 p-8 flex flex-col max-w-4xl">
         <AddSubject subjects={subjects} setSubjects={setSubjects} />
         <RecommendTopics />
