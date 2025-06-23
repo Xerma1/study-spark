@@ -32,7 +32,7 @@ export default function Page() {
       <div className="flex justify-center">
         <div className="flex-1 p-8 max-w-4xl">
           <button
-            className="mb-6 flex items-center gap-2 px-4 py-2 rounded-lg bg-[#415A77] hover:brightness-120 text-[#E0E1DD] font-semibold shadow transition-brightness duration-150"
+            className="flex items-center gap-2 bg-gradient-to-r from-blue-100 to-purple-200 text-blue-900 text-lg font-semibold px-5 py-2 rounded-2xl shadow transition-all duration-150 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-purple-300"
             onClick={() => router.back()}
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">

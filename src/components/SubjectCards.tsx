@@ -99,37 +99,46 @@ export default function RenderSubjectCards({ subjects }: { subjects: Subject[] }
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
           {subjectList.map((subject, subjectId) => {
             const score = calcSubjectScore(subject);
-            let bgColor = "bg-blue-400";
-
-            if (score === -1) bgColor = "bg-gray-300";
-            else if (score < 40) bgColor = "bg-red-400";
-            else if (score < 70) bgColor = "bg-yellow-300";
-            else bgColor = "bg-green-400";
+            let borderColor = "border-l-4 border-green-400";
+            if (score === -1) borderColor = "border-l-12 border-gray-400";
+            else if (score < 40) borderColor = "border-l-12 border-red-400";
+            else if (score < 70) borderColor = "border-l-12 border-yellow-300";
 
             let scoreUI;
             if (score === -1) scoreUI = "No topics registered";
             else scoreUI = `${score} %`;
 
-            return(
-              <div key={subjectId} className="relative">
+            return (
+              <div key={subjectId} className={`relative bg-gradient-to-r from-blue-100 to-purple-200 shadow-lg rounded-xl p-5 ${borderColor} transition hover:scale-[1.02] hover:shadow-xl`}>
                 <Link 
                   href={`/subject/${subjectId}`}
-                  className={`p-4 bg-blue-400 rounded hover:opacity-80 transition-opacity duration-100 block ${bgColor}`}
+                  className="block"
                 >
-                  <div className="flex justify-between items-center">
-                    <h1>{subject.name}</h1>
+                  <div className="flex justify-between items-center mb-2">
+                    <h1 className="text-lg font-semibold text-blue-900">{subject.name}</h1>
                     <button
-                      className="text-black text-2xl px-2 opacity-20 hover:opacity-100 transition-opacity duration-100"
+                      className="text-gray-500 text-2xl px-2 opacity-40 hover:opacity-100 transition-opacity duration-100"
                       onClick={e => {
                         e.preventDefault();
                         setOpenMenu(openMenu === subjectId ? null : subjectId);
                       }}
                     >
-                      &#x22EE; {/* Unicode for vertical ellipsis */}
+                      &#x22EE;
                     </button>
                   </div>
-                  <div className="mt-2 text-sm text-gray-700 font-semibold">
-                    Proficiency: {scoreUI}
+                  <div className="flex justify-end">
+                    <span className={
+                      "font-bold px-3 py-1 rounded-full text-sm " +
+                      (score === -1
+                        ? "bg-gray-300 text-gray-600"
+                        : score < 40
+                        ? "bg-red-100 text-red-600"
+                        : score < 70
+                        ? "bg-yellow-100 text-yellow-700"
+                        : "bg-green-100 text-green-700")
+                    }>
+                      Proficiency: {scoreUI}
+                    </span>
                   </div>
                 </Link>
                 {openMenu === subjectId && (

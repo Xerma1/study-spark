@@ -108,6 +108,15 @@ export default function RenderStudySeshCards({
     if (stored) {
       const subjectsArr = JSON.parse(stored);
       subjectsArr[subjectIndex].topics[topicIndex].studySessions.splice(sessionId, 1);
+      
+      // Recalculate and update the topic score after deletion
+    const tempTopic = {
+      ...subjectsArr[subjectIndex].topics[topicIndex],
+      studySessions: subjectsArr[subjectIndex].topics[topicIndex].studySessions,
+    };
+    const newScore = calcTopicScore(tempTopic);
+    subjectsArr[subjectIndex].topics[topicIndex].score = newScore;
+    
       localStorage.setItem('subjects', JSON.stringify(subjectsArr));
       window.dispatchEvent(new Event("subjectsUpdated"));
     }

@@ -25,7 +25,7 @@ function getLowestTopics(): TopicWithSubject[] {
       }))
     );
   return allTopics
-    .filter(topic => topic.score <= 70)
+    .filter(topic => topic.score < 70)
     .sort((a, b) => a.score - b.score)
     .slice(0, 3);
 }

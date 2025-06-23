@@ -31,11 +31,15 @@ export default function AddSubject({ subjects, setSubjects }: AddSubjectProps) {
   return (
     <div className="p-8"> 
       <button
-        className="block bg-[#415A77] hover:bg-[#E0E1DD] hover:text-[#0D1B2A] transition-colors duration-100
-        text-[#E0E1DD] text-2xl font-bold px-4 py-2 rounded-xl w-full cursor-pointer"
+        className="block bg-gradient-to-r from-blue-600 via-purple-500 to-blue-400 hover:from-blue-700 hover:to-purple-600 text-white text-xl font-semibold px-6 py-3 rounded-2xl shadow-lg w-full transition-all duration-150 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-purple-300"
         onClick={openModal}
       >
-        Add course (+)
+        <span className="inline-flex items-center gap-2">
+          <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
+          </svg>
+          Add course
+        </span>
       </button>
 
       {/* Modal */}
@@ -54,25 +58,25 @@ export default function AddSubject({ subjects, setSubjects }: AddSubjectProps) {
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
               transition={{ duration: 0.1 }}
-              className="bg-white p-6 rounded-lg shadow-lg w-96"
+              className="bg-gradient-to-br from-blue-50 to-purple-100 p-6 rounded-2xl shadow-2xl w-96 border border-blue-200"
             >
-              <h2 className="text-xl mb-4">Enter subject name</h2>
+              <h2 className="text-2xl font-bold mb-4 text-blue-900">Enter subject name</h2>
               <input
                 type="text"
-                className="w-full border border-gray-300 p-2 rounded mb-4"
+                className="w-full border border-blue-200 p-2 rounded mb-4 focus:ring-2 focus:ring-purple-300 focus:outline-none bg-white/80 text-blue-900"
                 onChange={(e) => setInputValue(e.target.value)}
                 placeholder="Type something..."
               />
               <div className="flex justify-end space-x-2">
                 <button
                   onClick={closeModal}
-                  className="bg-gray-300 text-gray-700 px-4 py-2 rounded cursor-pointer hover:opacity-80 transition-opacity duration-100"
+                  className="bg-gray-200 text-blue-900 px-4 py-2 rounded-lg cursor-pointer hover:bg-gray-300 transition"
                 >
                   Cancel
                 </button>
                 <button
                   onClick={handleSubmit}
-                  className="bg-blue-500 text-white px-4 py-2 rounded cursor-pointer hover:opacity-80 transition-opacity duration-100"
+                  className="bg-gradient-to-r from-blue-500 to-purple-400 text-white px-4 py-2 rounded-lg font-semibold shadow hover:from-blue-600 hover:to-purple-500 transition"
                 >
                   Submit
                 </button>

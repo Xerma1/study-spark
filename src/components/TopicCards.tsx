@@ -100,25 +100,22 @@ export default function RenderTopicCards({ topics, subjectName, refresh }: { top
         <h1 className="text-xl text-[#E0E1DD] pl-7 mt-2">Topics:</h1>
         
         <div className="flex flex-col gap-4 m-4">
-          {sortedTopics.map((topic, topicId) => (
-            <div key={topicId} className="relative">
-              <Link
-                href={`/subject/${index}/${topicId}`}
-                className={clsx(
-                  "p-4 bg-blue-400 rounded hover:opacity-80 transition-opacity duration-100 block",
-                  {
-                    'bg-red-400': topic.score <= 40,
-                    'bg-yellow-300': topic.score > 40 && topic.score <= 70, 
-                    'bg-green-400': topic.score > 70,
-                  }
+          {sortedTopics.map((topic, topicId) => {
+            // Choose border color based on score
+            let borderColor = "border-l-12 border-green-400";
+            if (topic.score <= 40) borderColor = "border-l-12 border-red-400";
+            else if (topic.score <= 70) borderColor = "border-l-12 border-yellow-300";
 
-                )}
-              >
-                <div className="flex justify-between items-center">
-                  <h1>{topic.name}</h1>
-                  <div>
+            return (
+              <div key={topicId} className={`relative bg-gradient-to-r from-blue-100 to-purple-200 shadow-lg rounded-xl p-5 ${borderColor} transition hover:scale-[1.02] hover:shadow-xl`}>
+                <Link
+                  href={`/subject/${index}/${topicId}`}
+                  className="block"
+                >
+                  <div className="flex justify-between items-center mb-2">
+                    <h1 className="text-lg font-semibold text-blue-900">{topic.name}</h1>
                     <button
-                      className="text-black text-2xl px-2 opacity-20 hover:opacity-100 transition-opacity duration-100"
+                      className="text-gray-500 text-2xl px-2 opacity-40 hover:opacity-100 transition-opacity duration-100"
                       onClick={e => {
                         e.preventDefault();
                         setOpenMenu(openMenu === topicId ? null : topicId);
@@ -127,32 +124,41 @@ export default function RenderTopicCards({ topics, subjectName, refresh }: { top
                       &#x22EE;
                     </button>
                   </div>
-                </div>
-                <div className="flex justify-end">
-                  <span className="font-bold">Score: {topic.score}</span>
-                </div>
-              </Link>
-              {openMenu === topicId && (
-                <div
-                  ref={menuRef}
-                  className="absolute right-4 top-12 bg-[#E0E1DD] rounded shadow-lg z-10 flex flex-col"
-                >
-                  <button
-                    className="px-4 py-2 hover:bg-gray-300 transition-colors duration-150 text-left"
-                    onClick={() => openEditModal(topicId)}
-                  >Edit</button>
-                  <button
-                    className="px-4 py-2 hover:bg-gray-300 transition-colors duration-150 text-left text-red-600"
-                    onClick={() => {
-                      setDeletingId(topicId);
-                      setDeleteConfirmOpen(true);
-                      setOpenMenu(null);
-                    }}
-                  >Delete</button>
-                </div>
-              )}
-            </div>
-          ))}
+                  <div className="flex justify-end">
+                    <span className={
+                      "font-bold px-3 py-1 rounded-full text-sm " +
+                      (topic.score <= 40
+                        ? "bg-red-100 text-red-600"
+                        : topic.score <= 70
+                        ? "bg-yellow-100 text-yellow-700"
+                        : "bg-green-100 text-green-700")
+                    }>
+                      Proficiency: {topic.score}%
+                    </span>
+                  </div>
+                </Link>
+                {openMenu === topicId && (
+                  <div
+                    ref={menuRef}
+                    className="absolute right-4 top-12 bg-[#E0E1DD] rounded shadow-lg z-10 flex flex-col"
+                  >
+                    <button
+                      className="px-4 py-2 hover:bg-gray-300 transition-colors duration-150 text-left"
+                      onClick={() => openEditModal(topicId)}
+                    >Edit</button>
+                    <button
+                      className="px-4 py-2 hover:bg-gray-300 transition-colors duration-150 text-left text-red-600"
+                      onClick={() => {
+                        setDeletingId(topicId);
+                        setDeleteConfirmOpen(true);
+                        setOpenMenu(null);
+                      }}
+                    >Delete</button>
+                  </div>
+                )}
+              </div>
+            );
+          })}
         </div>
       </div>
 
