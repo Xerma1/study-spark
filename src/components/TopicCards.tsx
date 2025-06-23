@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Topic } from '@/data/topic';
 import sortTopicsInLocalStorage from '@/utils/sortTopics';
 import Link from 'next/link';
+import clsx from 'clsx';
 
 export default function RenderTopicCards({ topics, subjectName, refresh }: { topics: Topic[], subjectName: string, refresh: number }) {
   const params = useParams();
@@ -101,7 +102,15 @@ export default function RenderTopicCards({ topics, subjectName, refresh }: { top
             <div key={topicId} className="relative">
               <Link
                 href={`/subject/${index}/${topicId}`}
-                className="p-4 bg-blue-400 rounded hover:opacity-80 transition-opacity duration-100 block"
+                className={clsx(
+                  "p-4 bg-blue-400 rounded hover:opacity-80 transition-opacity duration-100 block",
+                  {
+                    'bg-red-400': topic.score <= 40,
+                    'bg-yellow-300': topic.score <= 70,
+                    'bg-green-400': topic.score > 70,
+                  }
+
+                )}
               >
                 <div className="flex justify-between items-center">
                   <h1>{topic.name}</h1>

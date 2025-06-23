@@ -89,7 +89,7 @@ export default function RenderStudySeshCards({
         const newScore = calcTopicScore(tempTopic);
         subjectsArr[subjectIndex].topics[topicIndex].score = newScore;
       }
-      
+
       localStorage.setItem('subjects', JSON.stringify(subjectsArr));
     }
 
@@ -146,9 +146,9 @@ export default function RenderStudySeshCards({
                 'p-4 rounded',
                 {
                   'relative': isMenuOpen,
-                  'bg-[#E62026]': session.levelOfConfidence === 'Low',
-                  'bg-[#E6C137]': session.levelOfConfidence === 'Medium',
-                  'bg-green-500': session.levelOfConfidence === 'High',
+                  'bg-red-400': session.levelOfConfidence === 'Low',
+                  'bg-yellow-300': session.levelOfConfidence === 'Medium',
+                  'bg-green-400': session.levelOfConfidence === 'High',
                 }
               )}
             >

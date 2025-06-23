@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { Subject, Subjects as BaseSubjects } from "@/data/subjects";
 import AddSubject from '@/components/AddSubject';
 import SubjectCards from '@/components/SubjectCards';
+import RecommendTopics from "@/components/RecTopics";
 
 export default function Page() {
   const [subjects, setSubjects] = useState<Subject[]>([]);
@@ -27,6 +28,7 @@ export default function Page() {
     <div className="flex items-start justify-center">
       <main className="flex-1 p-8 flex flex-col max-w-4xl">
         <AddSubject subjects={subjects} setSubjects={setSubjects} />
+        <RecommendTopics />
         <div className="flex">
           <button className="bg-[#D12E34] text-[#E0E1DD] cursor-pointer p-2 rounded-xl"
             onClick={resetSubjects}>

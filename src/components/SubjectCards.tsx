@@ -3,6 +3,7 @@
 import { Subject } from "@/data/subjects";
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from 'framer-motion';
+import calcSubjectScore from "@/utils/calcSubjectScore";
 import Link from 'next/link';
 
 export default function RenderSubjectCards({ subjects }: { subjects: Subject[] }) {
@@ -94,46 +95,58 @@ export default function RenderSubjectCards({ subjects }: { subjects: Subject[] }
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
-          {subjectList.map((subject, subjectId) => (
-            <div key={subjectId} className="relative">
-              <Link 
-                href={`/subject/${subjectId}`}
-                className="p-4 bg-blue-400 rounded hover:opacity-80 transition-opacity duration-100 block"
-              >
-                <div className="flex justify-between items-center">
-                  <h1>{subject.name}</h1>
-                  <button
-                    className="text-black text-2xl px-2 opacity-20 hover:opacity-100 transition-opacity duration-100"
-                    onClick={e => {
-                      e.preventDefault();
-                      setOpenMenu(openMenu === subjectId ? null : subjectId);
-                    }}
-                  >
-                    &#x22EE; {/* Unicode for vertical ellipsis */}
-                  </button>
-                </div>
-              </Link>
-              {openMenu === subjectId && (
-                <div
-                  ref={menuRef}
-                  className="absolute right-4 top-12 bg-[#E0E1DD] rounded shadow-lg z-10 flex flex-col"
+          {subjectList.map((subject, subjectId) => {
+            const score = calcSubjectScore(subject);
+            let bgColor = "bg-blue-400";
+
+            if (score < 40) bgColor = "bg-red-400";
+            else if (score < 70) bgColor = "bg-yellow-300";
+            else bgColor = "bg-green-400";
+
+            return(
+              <div key={subjectId} className="relative">
+                <Link 
+                  href={`/subject/${subjectId}`}
+                  className={`p-4 bg-blue-400 rounded hover:opacity-80 transition-opacity duration-100 block ${bgColor}`}
                 >
-                  <button 
-                    className="px-4 py-2 hover:bg-gray-300 transition-colors duration-150 text-left"
-                    onClick={() => openEditModal(subjectId)}
-                  >Edit</button>
-                  <button 
-                    className="px-4 py-2 hover:bg-gray-300 transition-colors duration-150 text-left text-red-600"
-                    onClick={() => {
-                      setDeletingId(subjectId);
-                      setDeleteConfirmOpen(true);
-                      setOpenMenu(null);
-                    }}
-                  >Delete</button>
-                </div>
-              )}
-            </div>
-          ))}
+                  <div className="flex justify-between items-center">
+                    <h1>{subject.name}</h1>
+                    <button
+                      className="text-black text-2xl px-2 opacity-20 hover:opacity-100 transition-opacity duration-100"
+                      onClick={e => {
+                        e.preventDefault();
+                        setOpenMenu(openMenu === subjectId ? null : subjectId);
+                      }}
+                    >
+                      &#x22EE; {/* Unicode for vertical ellipsis */}
+                    </button>
+                  </div>
+                  <div className="mt-2 text-sm text-gray-700 font-semibold">
+                    Proficiency: {score}%
+                  </div>
+                </Link>
+                {openMenu === subjectId && (
+                  <div
+                    ref={menuRef}
+                    className="absolute right-4 top-12 bg-[#E0E1DD] rounded shadow-lg z-10 flex flex-col"
+                  >
+                    <button 
+                      className="px-4 py-2 hover:bg-gray-300 transition-colors duration-150 text-left"
+                      onClick={() => openEditModal(subjectId)}
+                    >Edit</button>
+                    <button 
+                      className="px-4 py-2 hover:bg-gray-300 transition-colors duration-150 text-left text-red-600"
+                      onClick={() => {
+                        setDeletingId(subjectId);
+                        setDeleteConfirmOpen(true);
+                        setOpenMenu(null);
+                      }}
+                    >Delete</button>
+                  </div>
+                )}
+              </div>
+            );
+          })}
         </div>
       </div> 
 
