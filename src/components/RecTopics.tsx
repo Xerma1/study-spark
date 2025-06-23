@@ -56,7 +56,7 @@ export default function RecommendTopics() {
   }, []);
 
   return (
-    <div className="p-6 bg-gradient-to-br from-[#E0E1DD] to-blue-50 rounded-xl shadow-lg mb-8 border border-blue-200 w-full mx-auto">
+    <div className="p-6 bg-gradient-to-r from-purple-200 to-blue-100 rounded-xl shadow-lg mb-8 border border-blue-200 w-full mx-auto">
       <h2 className="text-xl font-bold mb-4 text-blue-900 flex items-center gap-2">
         <svg className="w-6 h-6 text-blue-500" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
         Top 3 Topics to Focus On
