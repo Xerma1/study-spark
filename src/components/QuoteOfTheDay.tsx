@@ -2,18 +2,33 @@
 
 import { useEffect, useState } from "react";
 
+function getTodayString() {
+  return new Date().toISOString().slice(0, 10); // "YYYY-MM-DD"
+}
+
 export default function QuoteOfTheDay() {
   const [quote, setQuote] = useState<string>("");
 
   useEffect(() => {
-    fetch('/api/quote')
-      .then(res => res.json())
-      .then(data => {
-        if (Array.isArray(data) && data[0]) {
-          setQuote(`${data[0].q} — ${data[0].a}`);
-        }
-      })
-      .catch(() => setQuote("Stay motivated and keep learning!"));
+    const today = getTodayString();
+    const cachedQuote = localStorage.getItem("quoteOfTheDay");
+    const cachedDate = localStorage.getItem("quoteOfTheDayDate");
+
+    if (cachedQuote && cachedDate === today) {
+      setQuote(cachedQuote);
+    } else {
+      fetch('/api/quote')
+        .then(res => res.json())
+        .then(data => {
+          if (Array.isArray(data) && data[0]) {
+            const newQuote = `${data[0].q} — ${data[0].a}`;
+            setQuote(newQuote);
+            localStorage.setItem("quoteOfTheDay", newQuote);
+            localStorage.setItem("quoteOfTheDayDate", today);
+          }
+        })
+        .catch(() => setQuote("Stay motivated and keep learning!"));
+    }
   }, []);
 
   return (
