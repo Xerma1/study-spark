@@ -137,63 +137,83 @@ export default function RenderSubjectCards({ subjects }: { subjects: Subject[] }
         </div>
       </div> 
 
-      {editModalOpen && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-          <div className="bg-[#E0E1DD] p-6 rounded shadow-lg flex flex-col gap-4 min-w-[300px]">
-            <h2 className="text-xl font-bold mb-2">Edit Subject Name</h2>
-            <input
-              className="border p-2 rounded"
-              value={editValue}
-              onChange={e => setEditValue(e.target.value)}
-              autoFocus
-            />
-            <div className="flex justify-end gap-2">
-              <button
-                className="px-4 py-2 bg-blue-500 text-[#E0E1DD] rounded"
-                onClick={handleEditSave}
-              >
-                Save
-              </button>
-              <button
-                className="px-4 py-2 bg-gray-300 text-black rounded"
-                onClick={() => setEditModalOpen(false)}
-              >
-                Cancel
-              </button>
+      <AnimatePresence>
+        {editModalOpen && (
+          <motion.div
+            key="backdrop"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/80 flex justify-center items-center z-50"
+          >
+            <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+              <div className="bg-[#E0E1DD] p-6 rounded shadow-lg flex flex-col gap-4 min-w-[300px]">
+                <h2 className="text-xl font-bold mb-2">Edit Subject Name</h2>
+                <input
+                  className="border p-2 rounded"
+                  value={editValue}
+                  onChange={e => setEditValue(e.target.value)}
+                  autoFocus
+                />
+                <div className="flex justify-end gap-2">
+                  <button
+                    className="px-4 py-2 bg-blue-500 text-[#E0E1DD] rounded"
+                    onClick={handleEditSave}
+                  >
+                    Save
+                  </button>
+                  <button
+                    className="px-4 py-2 bg-gray-300 text-black rounded"
+                    onClick={() => setEditModalOpen(false)}
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-      )}
+          </motion.div>
+        )}
+      </AnimatePresence>
 
-      {deleteConfirmOpen && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-          <div className="bg-[#E0E1DD] p-6 rounded shadow-lg flex flex-col gap-4 min-w-[300px]">
-            <h2 className="text-xl font-bold mb-2 text-red-600">Confirm Delete</h2>
-            <p>Are you sure you want to delete this subject?</p>
-            <div className="flex justify-end gap-2">
-              <button
-                className="px-4 py-2 bg-red-500 text-[#E0E1DD] rounded"
-                onClick={() => {
-                  if (deletingId !== null) handleDelete(deletingId);
-                  setDeleteConfirmOpen(false);
-                  setDeletingId(null);
-                }}
-              >
-                Delete
-              </button>
-              <button
-                className="px-4 py-2 bg-gray-300 text-black rounded"
-                onClick={() => {
-                  setDeleteConfirmOpen(false);
-                  setDeletingId(null);
-                }}
-              >
-                Cancel
-              </button>
+      <AnimatePresence> 
+        {deleteConfirmOpen && (
+          <motion.div
+            key="backdrop"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/80 flex justify-center items-center z-50"
+          >
+            <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+              <div className="bg-[#E0E1DD] p-6 rounded shadow-lg flex flex-col gap-4 min-w-[300px]">
+                <h2 className="text-xl font-bold mb-2 text-red-600">Confirm Delete</h2>
+                <p>Are you sure you want to delete this subject?</p>
+                <div className="flex justify-end gap-2">
+                  <button
+                    className="px-4 py-2 bg-red-500 text-[#E0E1DD] rounded"
+                    onClick={() => {
+                      if (deletingId !== null) handleDelete(deletingId);
+                      setDeleteConfirmOpen(false);
+                      setDeletingId(null);
+                    }}
+                  >
+                    Delete
+                  </button>
+                  <button
+                    className="px-4 py-2 bg-gray-300 text-black rounded"
+                    onClick={() => {
+                      setDeleteConfirmOpen(false);
+                      setDeletingId(null);
+                    }}
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-      )} 
+          </motion.div>
+        )}
+      </AnimatePresence> 
     </>
     
   );

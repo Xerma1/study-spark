@@ -31,7 +31,7 @@ export default function Page() {
       <div className="flex justify-center">
         <div className="flex-1 p-8 max-w-4xl">
           <AddStudySession sessions={sessions} setSessions={setSessions} />
-          <RenderStudySeshCards sessions={sessions} subjectName={subjectName} topicName={topicName}/>
+          <RenderStudySeshCards sessions={sessions} subjectName={subjectName} topicName={topicName} subjectIndex={subjectId} topicIndex={topicId}/>
         </div>
       </div>
     );
