@@ -38,6 +38,7 @@ export default function AddTopic({ topics, setTopics, setRefresh }: AddTopicsPro
           subjects[subjectIndex].topics.push(new Topic(inputValue, [], 0));
           // Save back to localStorage
           localStorage.setItem('subjects', JSON.stringify(subjects));
+          window.dispatchEvent(new Event("subjectsUpdated"));
           setRefresh(r => r + 1);
         }
       }

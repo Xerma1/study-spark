@@ -91,6 +91,7 @@ export default function RenderStudySeshCards({
       }
 
       localStorage.setItem('subjects', JSON.stringify(subjectsArr));
+      window.dispatchEvent(new Event("subjectsUpdated"));
     }
 
     setEditModalOpen(false);
@@ -108,6 +109,7 @@ export default function RenderStudySeshCards({
       const subjectsArr = JSON.parse(stored);
       subjectsArr[subjectIndex].topics[topicIndex].studySessions.splice(sessionId, 1);
       localStorage.setItem('subjects', JSON.stringify(subjectsArr));
+      window.dispatchEvent(new Event("subjectsUpdated"));
     }
 
     setDeleteConfirmOpen(false);

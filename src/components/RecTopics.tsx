@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { Subject } from "@/data/subjects";
-import { Topic } from "@/data/topic";
 import Link from "next/link";
 
 type TopicWithSubject = {
@@ -11,40 +10,59 @@ type TopicWithSubject = {
   topicId: number;
 };
 
+function getLowestTopics(): TopicWithSubject[] {
+  const stored = localStorage.getItem("subjects");
+  if (!stored) return [];
+  const subjectsArr: Subject[] = JSON.parse(stored);
+  const allTopics: TopicWithSubject[] = subjectsArr
+    .flatMap((subject, subjectIdx) =>
+      (subject.topics || []).map((topic, topicIdx) => ({
+        name: topic.name,
+        score: topic.score ?? 0,
+        subjectName: subject.name || "Unknown Subject",
+        subjectId: subjectIdx,
+        topicId: topicIdx,
+      }))
+    );
+  return allTopics
+    .filter(topic => topic.score <= 70)
+    .sort((a, b) => a.score - b.score)
+    .slice(0, 3);
+}
+
 export default function RecommendTopics() {
   const [lowestTopics, setLowestTopics] = useState<TopicWithSubject[]>([]);
 
+  // Refresh logic
   useEffect(() => {
-    const stored = localStorage.getItem("subjects");
-    if (stored) {
-      const subjectsArr: Subject[] = JSON.parse(stored);
-      // Flatten all topics from all subjects, keeping track of subject name
-      const allTopics: (TopicWithSubject & { subjectId: number; topicId: number })[] = subjectsArr
-        .flatMap((subject, subjectIdx) =>
-          (subject.topics || []).map((topic, topicIdx) => ({
-            name: topic.name,
-            score: topic.score ?? 0,
-            subjectName: subject.name || "Unknown Subject",
-            subjectId: subjectIdx,
-            topicId: topicIdx,
-          }))
-        );
-      // Sort by score ascending and take the first 3
-      const sorted = allTopics
-        .sort((a, b) => a.score - b.score)
-        .slice(0, 3);
-      setLowestTopics(sorted);
-    }
+    setLowestTopics(getLowestTopics());
+
+    // Listen for localStorage changes (other tabs/windows)
+    const handleStorage = (e: StorageEvent) => {
+      if (e.key === "subjects") {
+        setLowestTopics(getLowestTopics());
+      }
+    };
+    window.addEventListener("storage", handleStorage);
+
+    // Listen for custom event in this tab
+    const handleCustom = () => setLowestTopics(getLowestTopics());
+    window.addEventListener("subjectsUpdated", handleCustom);
+
+    return () => {
+      window.removeEventListener("storage", handleStorage);
+      window.removeEventListener("subjectsUpdated", handleCustom);
+    };
   }, []);
 
   return (
     <div className="p-6 bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl shadow-lg mb-8 border border-blue-200 max-w-3xl ml-8">
       <h2 className="text-xl font-bold mb-4 text-blue-900 flex items-center gap-2">
         <svg className="w-6 h-6 text-blue-500" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-        Topics to Focus On
+        Top 3 Topics to Focus On
       </h2>
       {lowestTopics.length === 0 ? (
-        <p className="text-gray-500">No topics found.</p>
+        <p className="text-gray-500">Congratulations, you have no topics that require your attention! 🎉</p>
       ) : (
         <ul className="space-y-3">
           {lowestTopics.map((topic, idx) => (
@@ -73,7 +91,7 @@ export default function RecommendTopics() {
                     : "text-green-600")
                 }
               >
-                {topic.score ?? 0}%
+                Proficiency: {topic.score ?? 0}%
               </span>
             </li>
           ))}

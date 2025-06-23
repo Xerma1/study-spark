@@ -22,6 +22,7 @@ export default function AddSubject({ subjects, setSubjects }: AddSubjectProps) {
       const newSubjects = [...subjects, new Subject(inputValue, 0,[])];
       setSubjects(newSubjects);
       localStorage.setItem('subjects', JSON.stringify(newSubjects));
+      window.dispatchEvent(new Event("subjectsUpdated"));
       setInputValue('');
       closeModal();
     }

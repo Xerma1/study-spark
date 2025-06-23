@@ -55,6 +55,7 @@ export default function RenderSubjectCards({ subjects }: { subjects: Subject[] }
       const subjectsArr = JSON.parse(stored);
       subjectsArr[editingId].name = editValue;
       localStorage.setItem('subjects', JSON.stringify(subjectsArr));
+      window.dispatchEvent(new Event("subjectsUpdated"));
     }
     setEditModalOpen(false);
     setEditingId(null);
@@ -71,6 +72,7 @@ export default function RenderSubjectCards({ subjects }: { subjects: Subject[] }
       const subjectsArr = JSON.parse(stored);
       subjectsArr.splice(subjectId, 1);
       localStorage.setItem('subjects', JSON.stringify(subjectsArr));
+      window.dispatchEvent(new Event("subjectsUpdated"));
     }
 
     setOpenMenu(null);

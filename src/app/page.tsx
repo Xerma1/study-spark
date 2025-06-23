@@ -21,6 +21,7 @@ export default function Page() {
 
   const resetSubjects = () => {
     localStorage.setItem('subjects', JSON.stringify(BaseSubjects));
+    window.dispatchEvent(new Event("subjectsUpdated"));
     setSubjects(BaseSubjects); // Also update React state
   };
 

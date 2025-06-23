@@ -71,6 +71,7 @@ export default function RenderTopicCards({ topics, subjectName, refresh }: { top
       const subjectIndex = Number(params.subjectId);
       subjectsArr[subjectIndex].topics[editingId].name = editValue;
       localStorage.setItem('subjects', JSON.stringify(subjectsArr));
+      window.dispatchEvent(new Event("subjectsUpdated"));
     }
     setEditModalOpen(false);
     setEditingId(null);
@@ -87,6 +88,7 @@ export default function RenderTopicCards({ topics, subjectName, refresh }: { top
       const subjectIndex = Number(params.subjectId);
       subjectsArr[subjectIndex].topics.splice(topicId, 1);
       localStorage.setItem('subjects', JSON.stringify(subjectsArr));
+      window.dispatchEvent(new Event("subjectsUpdated"));
     }
     setOpenMenu(null);
   };
@@ -106,7 +108,7 @@ export default function RenderTopicCards({ topics, subjectName, refresh }: { top
                   "p-4 bg-blue-400 rounded hover:opacity-80 transition-opacity duration-100 block",
                   {
                     'bg-red-400': topic.score <= 40,
-                    'bg-yellow-300': topic.score <= 70,
+                    'bg-yellow-300': topic.score > 40 && topic.score <= 70, 
                     'bg-green-400': topic.score > 70,
                   }
 

@@ -49,6 +49,7 @@ export default function AddStudySession({ sessions, setSessions }: AddSeshProp) 
           topic.score = newScore;
           // Save to local storage
           localStorage.setItem('subjects', JSON.stringify(subjects));
+          window.dispatchEvent(new Event("subjectsUpdated"));
         }
       }
       setInputValue1('');
