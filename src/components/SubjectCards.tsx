@@ -99,7 +99,7 @@ export default function RenderSubjectCards({ subjects }: { subjects: Subject[] }
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
           {subjectList.map((subject, subjectId) => {
             const score = calcSubjectScore(subject);
-            let borderColor = "border-l-4 border-green-400";
+            let borderColor = "border-l-12 border-green-400";
             if (score === -1) borderColor = "border-l-12 border-gray-400";
             else if (score < 40) borderColor = "border-l-12 border-red-400";
             else if (score < 70) borderColor = "border-l-12 border-yellow-300";
