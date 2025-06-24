@@ -16,16 +16,21 @@ export default function Page() {
     const topicId = Number(params.topicId);
       
     useEffect(() => {
-    const stored = localStorage.getItem("subjects");
-    if (stored) {
-        const subjects = JSON.parse(stored);
-        if (subjects[subjectId] && (subjects[subjectId].topics)[topicId]) {
+      const updateSessions = () => {
+        const stored = localStorage.getItem("subjects");
+        if (stored) {
+          const subjects = JSON.parse(stored);
+          if (subjects[subjectId] && (subjects[subjectId].topics)[topicId]) {
             const topic = (subjects[subjectId].topics)[topicId]
             setSubjectName(subjects[subjectId].name || '');
             setTopicName(topic.name || '');
             setSessions(topic.studySessions || []);
+          }
         }
-    } 
+      };
+      updateSessions(); // initial load
+      window.addEventListener("subjectsUpdated", updateSessions);
+      return () => window.removeEventListener("subjectsUpdated", updateSessions);
     }, [subjectId, topicId]);
 
     return(

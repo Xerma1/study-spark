@@ -11,13 +11,18 @@ export default function Page() {
   const [subjects, setSubjects] = useState<Subject[]>([]);
 
   useEffect(() => {
+    // Initial load
     const stored = localStorage.getItem("subjects");
     if (stored) {
       setSubjects(JSON.parse(stored));
-    } else {
-      setSubjects(BaseSubjects);
-      localStorage.setItem("subjects", JSON.stringify(BaseSubjects));
     }
+    // Listen for updates
+    const handleUpdate = () => {
+      const updated = localStorage.getItem("subjects");
+      if (updated) setSubjects(JSON.parse(updated));
+    };
+    window.addEventListener("subjectsUpdated", handleUpdate);
+    return () => window.removeEventListener("subjectsUpdated", handleUpdate);
   }, []);
 
   const resetSubjects = () => {

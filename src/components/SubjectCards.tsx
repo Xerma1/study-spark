@@ -12,14 +12,9 @@ export default function RenderSubjectCards({ subjects }: { subjects: Subject[] }
   const [editModalOpen, setEditModalOpen] = useState(false);
   const [editValue, setEditValue] = useState('');
   const [editingId, setEditingId] = useState<number | null>(null);
-  const [subjectList, setSubjectList] = useState(subjects);
 
   const [deleteConfirmOpen, setDeleteConfirmOpen] = useState(false);
   const [deletingId, setDeletingId] = useState<number | null>(null);
-
-  useEffect(() => {
-    setSubjectList(subjects);
-  }, [subjects]);
 
   useEffect(() => {
     if (openMenu === null) return;
@@ -39,16 +34,13 @@ export default function RenderSubjectCards({ subjects }: { subjects: Subject[] }
   
   const openEditModal = (subjectId: number) => {
     setEditingId(subjectId);
-    setEditValue(subjectList[subjectId].name);
+    setEditValue(subjects[subjectId].name);
     setEditModalOpen(true);
     setOpenMenu(null);
   };
 
   const handleEditSave = () => {
     if (editingId === null) return;
-    const updated = [...subjectList];
-    updated[editingId] = { ...updated[editingId], name: editValue };
-    setSubjectList(updated);
     // Update localStorage
     const stored = localStorage.getItem('subjects');
     if (stored) {
@@ -62,10 +54,6 @@ export default function RenderSubjectCards({ subjects }: { subjects: Subject[] }
   };
 
   const handleDelete = (subjectId: number) => {
-    // Remove from UI
-    const updated = subjectList.filter((_, idx) => idx !== subjectId);
-    setSubjectList(updated);
-
     // Remove from localStorage
     const stored = localStorage.getItem('subjects');
     if (stored) {
@@ -97,7 +85,7 @@ export default function RenderSubjectCards({ subjects }: { subjects: Subject[] }
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
-          {subjectList.map((subject, subjectId) => {
+          {subjects.map((subject, subjectId) => {
             const score = calcSubjectScore(subject);
             let borderColor = "border-l-12 border-green-400";
             if (score === -1) borderColor = "border-l-12 border-gray-400";
