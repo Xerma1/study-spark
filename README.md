@@ -28,7 +28,8 @@ After each study session, students log how well it went and the date. If a topic
 
 Based on the scores, the app recommends the top 3 topics needing review. This removes the guesswork in choosing what to study next, helping students stay focused and efficient.
 
-We built this app using Next.js, leveraging its file-based routing and React components for better code structure. We used LocalStorage for data persistence due to limited backend experience. A daily motivational quote is also provided via the ZenQuotes API.
+This app is built using Next.js, leveraging on its file-based routing and React components for better code structure. I used LocalStorage for data persistence due to limited backend experience xD. A daily motivational quote (which ended up not really being motivational but the idea is there) is also provided via the ZenQuotes API.
 
+![My Project Logo](images/CCDS Innovation Lab - SummerBuild 2025 - Gold Achievement - 2025-06-27.png)
 
 
