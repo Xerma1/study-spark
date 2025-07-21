@@ -1,4 +1,4 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app) for the SummerBuild 2025 hackathon hosted by DevHub@iLab, innovation lab @ NTU CCDS
 
 ## Getting Started
 
@@ -30,6 +30,7 @@ Based on the scores, the app recommends the top 3 topics needing review. This re
 
 This app is built using Next.js, leveraging on its file-based routing and React components for better code structure. I used LocalStorage for data persistence due to limited backend experience xD. A daily motivational quote (which ended up not really being motivational but the idea is there) is also provided via the ZenQuotes API.
 
-![My Project Logo](images/LOFA.png)
+[![My Logo](images/LOFA.png)](https://badgr.com/public/assertions/YFJa-Z-AQW-RG_6kfaZVgg)
+
 
 
