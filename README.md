@@ -32,6 +32,8 @@ This app is built using Next.js, leveraging on its file-based routing and React 
 
 Level Of Achievement (Gold) badge (Basic CRUD + API integration):
 
+(Click on image to check authenticity)
+
 [![My Logo](images/LOFA.png)](https://badgr.com/public/assertions/YFJa-Z-AQW-RG_6kfaZVgg?identity__email=JASP0016%40e.ntu.edu.sg)
 
 
