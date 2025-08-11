@@ -25,12 +25,6 @@ export default function Page() {
     return () => window.removeEventListener("subjectsUpdated", handleUpdate);
   }, []);
 
-  const resetSubjects = () => {
-    localStorage.setItem('subjects', JSON.stringify(BaseSubjects));
-    window.dispatchEvent(new Event("subjectsUpdated"));
-    setSubjects(BaseSubjects); // Also update React state
-  };
-
   return (
     <div className="min-h-screen flex items-start justify-center">
       <main className="flex-1 p-8 flex flex-col max-w-4xl">

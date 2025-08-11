@@ -1,8 +1,8 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Subject, Subjects as BaseSubjects } from '@/data/subjects';
+import { Subject} from '@/data/subjects';
 
 interface AddSubjectProps {
   subjects: Subject[];

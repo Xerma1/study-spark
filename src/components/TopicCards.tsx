@@ -7,9 +7,8 @@ import { Topic } from '@/data/topic';
 import sortTopicsInLocalStorage from '@/utils/sortTopics';
 import calcTopicScore from "@/utils/calcTopicScore";
 import Link from 'next/link';
-import clsx from 'clsx';
 
-export default function RenderTopicCards({ topics, subjectName, refresh }: { topics: Topic[], subjectName: string, refresh: number }) {
+export default function RenderTopicCards({ subjectName, refresh }: { topics: Topic[], subjectName: string, refresh: number }) {
   const params = useParams();
   const index = Number(params.subjectId);
   const [sortedTopics, setSortedTopics] = useState<Topic[]>([]);

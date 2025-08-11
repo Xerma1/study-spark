@@ -1,9 +1,9 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState} from 'react';
 import { useParams } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Subject, Subjects } from '@/data/subjects';
+import { Subject} from '@/data/subjects';
 import { Topic } from '@/data/topic';
 
 
