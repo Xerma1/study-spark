@@ -143,7 +143,7 @@ export default function RenderStudySeshCards({
       <h1 className="text-3xl font-bold text-[#E0E1DD] mb-4">{subjectName}</h1>
       <h1 className="text-2xl font-bold text-[#E0E1DD]">Topic {'>'} {topicName}</h1>
       <div className="flex items-center">
-        <img src="/study.svg" className="mt-1 -mr-4 w-7 h-7" />
+        <img src="/study.svg" alt="study icon" className="mt-1 -mr-4 w-7 h-7" />
         <h1 className="text-xl text-[#E0E1DD] pl-7 pt-4">Showing past study sessions:</h1>
       </div>
 

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from "react";
-import { Subject, Subjects as BaseSubjects } from "@/data/subjects";
+import { Subject} from "@/data/subjects";
 import AddSubject from '@/components/AddSubject';
 import SubjectCards from '@/components/SubjectCards';
 import RecommendTopics from "@/components/RecTopics";

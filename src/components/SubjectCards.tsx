@@ -79,7 +79,7 @@ export default function RenderSubjectCards({ subjects }: { subjects: Subject[] }
     <>
       <div className="mt-8">
         <div className="flex items-center">
-          <img src="/courses.svg" className="mr-4 w-7 h-7"/>
+          <img src="/courses.svg" alt="courses icon" className="mr-4 w-7 h-7"/>
           <h1 className="text-[#E0E1DD] font-bold text-3xl">
             Courses
           </h1>
