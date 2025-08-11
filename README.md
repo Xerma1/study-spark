@@ -30,7 +30,11 @@ Based on the scores, the app recommends the top 3 topics needing review. This re
 
 This app is built using Next.js, leveraging on its file-based routing and React components for better code structure. I used LocalStorage for data persistence due to limited backend experience xD. A daily motivational quote (which ended up not really being motivational but the idea is there) is also provided via the ZenQuotes API.
 
-[![My Logo](images/LOFA.png)](https://badgr.com/public/assertions/YFJa-Z-AQW-RG_6kfaZVgg)
+Level Of Achievement (Gold) badge (Basic CRUD + API integration):
+
+(Click on image to check authenticity)
+
+[![My Logo](images/LOFA.png)](https://badgr.com/public/assertions/YFJa-Z-AQW-RG_6kfaZVgg?identity__email=JASP0016%40e.ntu.edu.sg)
 
 
 
