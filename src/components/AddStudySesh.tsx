@@ -105,7 +105,7 @@ export default function AddStudySession({ sessions, setSessions }: AddSeshProp) 
 
               <h2 className="text-2xl font-bold mb-4 text-blue-900">Enter date</h2>
               <Calendar
-                onChange={setInputValue2}
+                onChange={value => setInputValue2((value as Date) ?? new Date())}
                 value={inputValue2}
               />
               <p className="text-blue-900 mt-2">Selected date: {inputValue2.toDateString()}</p>
