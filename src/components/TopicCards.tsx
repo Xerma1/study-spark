@@ -5,6 +5,7 @@ import { useEffect, useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Topic } from '@/data/topic';
 import sortTopicsInLocalStorage from '@/utils/sortTopics';
+import calcTopicScore from "@/utils/calcTopicScore";
 import Link from 'next/link';
 import clsx from 'clsx';
 
@@ -101,10 +102,11 @@ export default function RenderTopicCards({ topics, subjectName, refresh }: { top
         
         <div className="flex flex-col gap-4 m-4">
           {sortedTopics.map((topic, topicId) => {
+            const score = calcTopicScore(topic);
             // Choose border color based on score
             let borderColor = "border-l-12 border-green-400";
-            if (topic.score <= 40) borderColor = "border-l-12 border-red-400";
-            else if (topic.score <= 70) borderColor = "border-l-12 border-yellow-300";
+            if (score <= 40) borderColor = "border-l-12 border-red-400";
+            else if (score <= 70) borderColor = "border-l-12 border-yellow-300";
 
             return (
               <div key={topicId} className={`relative bg-gradient-to-r from-blue-100 to-purple-200 shadow-lg rounded-xl p-5 ${borderColor} transition hover:scale-[1.02] hover:shadow-xl`}>
@@ -127,13 +129,13 @@ export default function RenderTopicCards({ topics, subjectName, refresh }: { top
                   <div className="flex justify-end">
                     <span className={
                       "font-bold px-3 py-1 rounded-full text-sm " +
-                      (topic.score <= 40
+                      (score <= 40
                         ? "bg-red-100 text-red-600"
-                        : topic.score <= 70
+                        : score <= 70
                         ? "bg-yellow-100 text-yellow-700"
                         : "bg-green-100 text-green-700")
                     }>
-                      Proficiency: {topic.score}%
+                      Proficiency: {score}%
                     </span>
                   </div>
                 </Link>

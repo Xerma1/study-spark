@@ -4,6 +4,7 @@ import { Subject } from "@/data/subjects";
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from 'framer-motion';
 import calcSubjectScore from "@/utils/calcSubjectScore";
+import calcTopicScore from "@/utils/calcTopicScore";
 import Link from 'next/link';
 
 export default function RenderSubjectCards({ subjects }: { subjects: Subject[] }) {
@@ -86,6 +87,12 @@ export default function RenderSubjectCards({ subjects }: { subjects: Subject[] }
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
           {subjects.map((subject, subjectId) => {
+
+             // Recalculate each topic's score before calculating subject score
+            subject.topics.forEach(topic => {
+              topic.score = calcTopicScore(topic);
+            });
+
             const score = calcSubjectScore(subject);
             let borderColor = "border-l-12 border-green-400";
             if (score === -1) borderColor = "border-l-12 border-gray-400";

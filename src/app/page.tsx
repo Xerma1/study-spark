@@ -37,12 +37,6 @@ export default function Page() {
         <QuoteOfTheDay />
         <AddSubject subjects={subjects} setSubjects={setSubjects} />
         <RecommendTopics />
-        <div className="flex">
-          <button className="bg-[#D12E34] text-[#E0E1DD] cursor-pointer p-2 rounded-xl"
-            onClick={resetSubjects}>
-              For development: Reset to base data
-          </button>
-        </div>
         <SubjectCards subjects={subjects} />
       </main>
     </div>

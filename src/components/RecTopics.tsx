@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Subject } from "@/data/subjects";
+import calcTopicScore from "@/utils/calcTopicScore";
 import Link from "next/link";
 
 type TopicWithSubject = {
@@ -18,7 +19,7 @@ function getLowestTopics(): TopicWithSubject[] {
     .flatMap((subject, subjectIdx) =>
       (subject.topics || []).map((topic, topicIdx) => ({
         name: topic.name,
-        score: topic.score ?? 0,
+        score: calcTopicScore(topic),
         subjectName: subject.name || "Unknown Subject",
         subjectId: subjectIdx,
         topicId: topicIdx,

@@ -18,7 +18,7 @@ export default function calcTopicScore(topic: Topic) {
     const { levelOfConfidence, date } = mostRecentSession;
     // Parse the date into the Date object
     const sessionDate = new Date(date);
-    const now = new Date();
+    let now = new Date();
     sessionDate.setHours(0,0,0,0);
     now.setHours(0,0,0,0);  
     const diffMs = sessionDate.getTime() - now.getTime();
